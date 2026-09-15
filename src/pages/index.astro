@@ -5,10 +5,7 @@ import { copy, principles, cases, incidents } from '../data/lab';
 import { glossary } from '../data/glossary';
 const payload = { copy, principles, cases, incidents, glossary };
 ---
-<Layout
-  title="ProdLab — Production backend system design"
-  description="Interactive lab for real backend system design: capacity, incidents, and interview cases. ES/EN. No account."
->
+<Layout title="ProdLab — Production backend system design" description="Interactive lab for real backend system design: capacity, incidents, and interview cases. ES/EN. No account.">
   <header>
     <button class="brand" id="logo" type="button">ProdLab</button>
     <div class="seg" role="group" aria-label="Language">
@@ -33,12 +30,12 @@ const payload = { copy, principles, cases, incidents, glossary };
       <div class="group" id="trackList"></div>
       <div id="play" hidden>
         <div class="card" id="qcard"></div>
+        <div class="diagram" id="diagram" aria-hidden="true"></div>
         <div id="opts"></div>
         <p class="fb" id="fb"></p>
         <pre class="snip" id="snip" hidden></pre>
         <div id="notes" hidden></div>
-        <button class="btn fill" id="next" disabled></button>
-        <button class="btn gray" id="backCases"></button>
+        <button class="btn fill" id="next" hidden></button>
       </div>
     </section>
     <section id="nums" class="view">
@@ -74,6 +71,7 @@ const payload = { copy, principles, cases, incidents, glossary };
         <input id="qS" type="range" min="0" max="1" value="1" />
       </div>
       <div class="stats" id="tradeStats"></div>
+      <div class="diagram" id="numDiagram" aria-hidden="true"></div>
       <div class="card" id="capAdvice"></div>
     </section>
     <section id="gloss" class="view">
@@ -89,27 +87,13 @@ const payload = { copy, principles, cases, incidents, glossary };
     </section>
   </main>
   <nav class="tab" aria-label="Primary">
-    <button data-view="home" class="on">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
-      <span data-k="home">Inicio</span>
-    </button>
-    <button data-view="cases">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
-      <span data-k="cases">Casos</span>
-    </button>
-    <button data-view="nums">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg>
-      <span data-k="nums">Números</span>
-    </button>
-    <button data-view="fire">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3s5 5 5 9a5 5 0 1 1-10 0c0-2 2-4 3-6 1 2 2 2 2-3z"/></svg>
-      <span data-k="fire">Fuego</span>
-    </button>
-    <button data-view="gloss">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4h11a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2V4z"/><path d="M8 4v16"/></svg>
-      <span data-k="gloss">Glosa</span>
-    </button>
+    <button data-view="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg><span data-k="home">Inicio</span></button>
+    <button data-view="cases"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg><span data-k="cases">Casos</span></button>
+    <button data-view="nums"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg><span data-k="nums">Números</span></button>
+    <button data-view="fire"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3s5 5 5 9a5 5 0 1 1-10 0c0-2 2-4 3-6 1 2 2 2 2-3z"/></svg><span data-k="fire">Fuego</span></button>
+    <button data-view="gloss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4h11a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2V4z"/><path d="M8 4v16"/></svg><span data-k="gloss">Glosa</span></button>
   </nav>
   <script id="data" type="application/json" set:html={JSON.stringify(payload)} />
+  <script is:inline src="/diagram.js"></script>
   <script is:inline src="/app.js"></script>
 </Layout>
