@@ -1,0 +1,18 @@
+{
+  "name": "ProdLab",
+  "short_name": "ProdLab",
+  "description": "Production system design lab for backend engineers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
