@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import { copy, principles, cases, incidents } from '../data/lab';
-
 const payload = { copy, principles, cases, incidents };
 ---
 <Layout
@@ -10,12 +9,7 @@ const payload = { copy, principles, cases, incidents };
   description="Interactive lab for real backend system design: capacity, incidents, and interview cases. ES/EN. No account."
 >
   <header>
-    <button class="brand" id="logo" type="button">
-      <span>
-        <b>ProdLab</b>
-        <small id="sub">System design de producción</small>
-      </span>
-    </button>
+    <button class="brand" id="logo" type="button">ProdLab</button>
     <div class="seg" role="group" aria-label="Language">
       <button type="button" data-lang="es" class="on">ES</button>
       <button type="button" data-lang="en">EN</button>
@@ -38,12 +32,12 @@ const payload = { copy, principles, cases, incidents };
       <p class="lead" id="casesLead"></p>
       <div class="group" id="trackList"></div>
       <div id="play" hidden>
-        <div class="steps" id="steps"></div>
         <div class="card" id="qcard"></div>
         <div id="opts"></div>
         <p class="fb" id="fb"></p>
         <pre class="snip" id="snip" hidden></pre>
-        <button class="btn fill" id="next"></button>
+        <div id="notes" hidden></div>
+        <button class="btn fill" id="next" disabled></button>
         <button class="btn gray" id="backCases"></button>
       </div>
     </section>
@@ -61,32 +55,42 @@ const payload = { copy, principles, cases, incidents };
         <label class="f"><span id="lRpu"></span> <b id="rpuV">20</b></label>
         <input id="rpu" type="range" min="1" max="200" value="20" />
         <label class="f"><span id="lPeak"></span> <b id="peakV">3×</b></label>
-        <input id="peak" type="range" min="1" max="8" step="0.5" value="3" />
+        <input id="peak" type="range" min="1" max="10" step="0.5" value="3" />
+        <label class="f"><span id="lReads"></span> <b id="readV">95%</b></label>
+        <input id="reads" type="range" min="50" max="99" value="95" />
+        <label class="f"><span id="lPay"></span> <b id="payV">4</b></label>
+        <input id="pay" type="range" min="0.5" max="64" step="0.5" value="4" />
       </div>
       <div class="stats" id="capOut"></div>
+      <div class="card">
+        <label class="f"><span id="lCons"></span> <b id="cV"></b></label>
+        <input id="cS" type="range" min="0" max="2" value="0" />
+        <label class="f"><span id="lReps"></span> <b id="repV">2</b></label>
+        <input id="repS" type="range" min="0" max="8" value="2" />
+        <label class="f"><span id="lTtl"></span> <b id="ttlV">30</b></label>
+        <input id="ttlS" type="range" min="0" max="600" step="5" value="30" />
+        <label class="f"><span id="lRegs"></span> <b id="regV">1</b></label>
+        <input id="regS" type="range" min="1" max="3" value="1" />
+        <label class="f"><span id="lQueue"></span> <b id="qV"></b></label>
+        <input id="qS" type="range" min="0" max="1" value="1" />
+      </div>
+      <div class="stats" id="tradeStats"></div>
       <div class="card" id="capAdvice"></div>
     </section>
 
     <section id="fire" class="view">
       <h1 id="fireTitle"></h1>
+      <p class="lead" id="fireLead"></p>
       <div class="card" id="inc"></div>
-      <button class="btn gray" id="nextInc"></button>
+      <button class="btn fill" id="nextInc" disabled></button>
     </section>
   </main>
 
   <nav class="tab" aria-label="Primary">
-    <button data-view="home" class="on">
-      <span data-k="home">Inicio</span>
-    </button>
-    <button data-view="cases">
-      <span data-k="cases">Casos</span>
-    </button>
-    <button data-view="nums">
-      <span data-k="nums">Números</span>
-    </button>
-    <button data-view="fire">
-      <span data-k="fire">Fuego</span>
-    </button>
+    <button data-view="home" class="on" data-k="home">Inicio</button>
+    <button data-view="cases" data-k="cases">Casos</button>
+    <button data-view="nums" data-k="nums">Números</button>
+    <button data-view="fire" data-k="fire">Fuego</button>
   </nav>
 
   <script id="data" type="application/json" set:html={JSON.stringify(payload)} />
